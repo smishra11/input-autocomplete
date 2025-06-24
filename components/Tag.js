@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
 
-const Tag = ({ data, removeTag, color }) => {
-  console.log(color);
+const Tag = ({ data, removeTag, tagColor }) => {
   return (
     <div
-      className={`inline-flex items-center bg-${color}-200 text-${color}-700 px-2 py-1 rounded-lg mr-1`}
+      className={`inline-flex items-center bg-${tagColor}-200 text-${tagColor}-700 px-2 py-1 rounded-lg mr-1`}
     >
       <span>{data.name}</span>
       <button
