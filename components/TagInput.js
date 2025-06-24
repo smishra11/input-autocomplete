@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import TagList from './TagList';
 import SuggestionList from './SuggestionList';
 
@@ -16,6 +10,8 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
   const [suggestionData, setSuggestionData] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [activeTag, setActiveTag] = useState(1);
+
+  const suggestionItemsLimit = 7;
 
   // Fetching mock data from API
   const fetchData = async () => {
@@ -40,6 +36,7 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
     fetchData();
   }, []);
 
+  // Tag selection
   const selectTag = useCallback(
     (tag) => {
       if (selectedTag.find((t) => t.id === tag.id)) return;
@@ -53,6 +50,7 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
     [selectedTag, setSelectedTag]
   );
 
+  // Remove tag
   const removeTag = useCallback(
     (tag) => {
       let filtered = selectedTag.filter((data) => data.id !== tag.id);
@@ -64,13 +62,14 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
               item.name.toLowerCase().includes(input.toLowerCase()) &&
               !filtered.some((data) => data.id === item.id)
           )
-          .slice(0, 7);
+          .slice(0, suggestionItemsLimit);
         setSuggestionData(filteredData);
       }
     },
     [data, input, selectedTag, setSelectedTag]
   );
 
+  // Handling keydown features
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -96,6 +95,7 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
     }
   };
 
+  // Input change
   const handleInputChange = (e) => {
     const value = e.target.value.trim();
     setInput(value);
@@ -117,7 +117,7 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
 
   return (
     <div className='relative'>
-      <TagList tags={selectedTag} removeTag={removeTag} color='blue' />
+      <TagList tags={selectedTag} removeTag={removeTag} tagColor='blue' />
       <input
         className='border border-gray-300 w-full rounded-lg p-2 mt-3'
         placeholder={loading ? 'Loading tags...' : 'Search'}
