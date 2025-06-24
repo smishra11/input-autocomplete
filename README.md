@@ -34,10 +34,11 @@ A reusable, accessible, and customizable multi-select **Tag Input** component wi
 
 ```bash
 npm install
+npm run dev
 ```
 
-### Run app in local
+### 2. Test the app
 
 ```bash
-npm run dev
+npm test
 ```
