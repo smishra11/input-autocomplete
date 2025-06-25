@@ -117,7 +117,7 @@ const TagInput = ({ selectedTag, setSelectedTag }) => {
 
   return (
     <div className='relative'>
-      <TagList tags={selectedTag} removeTag={removeTag} tagColor='blue' />
+      <TagList tags={selectedTag} removeTag={removeTag} tagColor='lightblue' />
       <input
         className='border border-gray-300 w-full rounded-lg p-2 mt-3'
         placeholder={loading ? 'Loading tags...' : 'Search'}
